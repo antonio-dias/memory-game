@@ -1,0 +1,50 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+.btn {cursor: pointer}
+.card {margin-top: 10px; background-color: #414040; color: #FFF;}
+.card-button {display: flex;justify-content: center}
+.card-title {text-align: center}
+.title {text-align: center;}
+.alert{ background-color: #414040; color: #FFF;}
+
+@include media-breakpoint-only(xs) {
+    .card {
+        margin-right: 5%;
+        margin-left: 5%
+    }
+}
+
+@include media-breakpoint-only(sm) {
+    .card {        
+        .card-title {
+            font-size: 35px;           
+        }
+    }
+}
+
+@include media-breakpoint-only(md) {
+    .card {
+        margin-right: 3%;
+        margin-left: 5%;
+    }
+}
+
+@include media-breakpoint-only(lg) {
+    .card {
+        margin-right: 3%;
+        margin-left: 5%;
+        .card-title {
+            font-size: 14px;           
+        }
+    }   
+}
+
+@include media-breakpoint-up(xl) {
+    .card {
+        margin-right: 3%;
+        margin-left: 5%;
+        .card-title {
+            font-size: 22px;           
+        }
+    }   
+}
