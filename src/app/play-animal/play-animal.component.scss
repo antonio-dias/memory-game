@@ -1,0 +1,49 @@
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+
+@include media-breakpoint-only(xs) {
+    .row {
+        background-color: purple;      
+        margin-bottom: 2%;
+        margin-right: 5%;
+        margin-left: 5%
+    }
+}
+
+@include media-breakpoint-only(sm) {
+    .card {  
+        background-color: red;      
+        .card-title {
+            font-size: 35px;           
+        }
+    }
+}
+
+@include media-breakpoint-only(md) {
+    .card {
+        background-color: yellow;
+        margin-right: 3%;
+        margin-left: 5%;
+    }
+}
+
+@include media-breakpoint-only(lg) {
+    .card {
+        background-color: green;
+        margin-right: 3%;
+        margin-left: 5%;
+        .card-title {
+            font-size: 14px;           
+        }
+    }   
+}
+
+@include media-breakpoint-up(xl) {
+    .card {
+        background-color: gray;
+        margin-right: 3%;
+        margin-left: 5%;
+        .card-title {
+            font-size: 22px;           
+        }
+    }   
+}

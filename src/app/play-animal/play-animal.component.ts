@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayAnimalComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit() {
+  indices: Array<number> = [];
+  nivel: number = 4;
+
+  constructor() { 
+    this.indices = new Array();
+    this.indices.push(0);
+    this.indices.push(1);
+    this.indices.push(0);
+    this.indices.push(1);
   }
+
+  ngOnInit() {}
 
 }
