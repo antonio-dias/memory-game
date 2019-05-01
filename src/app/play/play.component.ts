@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { faBaseballBall } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Card } from './card';
+import { debounceTime } from 'rxjs/operators'; 
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-play',
@@ -8,19 +10,141 @@ import { faBaseballBall } from '@fortawesome/free-solid-svg-icons';
 })
 export class PlayComponent implements OnInit {
 
+  private card_A: Card;
+  private card_B: Card;
+  private updatingPlay = false;
+  private eventSelectedTwoCard = new EventEmitter();
+  private cards: Array<Card> = [];
+  private nivel: number = 4;
+  private win: boolean = false;
+  
 
-  indices: Array<number> = [];
-  nivel: number = 4;
-  faBaseballBall = faBaseballBall;
+
+
 
   constructor() { 
-    this.indices = new Array();
-    this.indices.push(1);
-    this.indices.push(0);
-    this.indices.push(0);
-    this.indices.push(1);
+    this.init();
   }
 
-  ngOnInit() {}
+
+
+
+
+  ngOnInit() {
+    this.eventSelectedTwoCard.subscribe(response => {
+      if (this.card_A.getIndex() === this.card_B.getIndex()) {
+        this.toBlockCards();
+        this.clearCardsSelectds();
+      } else {
+        this.toUnblockCards();
+      }
+      this.validatePlay();
+    })
+  }
+
+
+
+
+
+  public selectCard(c: Card): void {
+    if(this.updatingPlay == false){
+      if (this.card_A == null) {
+          this.card_A = c;
+          this.card_A.setBlocked(true);
+      } else if (this.card_B == null) {
+          this.card_B = c;
+          this.card_B.setBlocked(true);
+      }
+      this.validateCard();
+    }
+  }
+
+
+
+
+
+  private validateCard(): void{
+    if (this.selectedTwoCards()) {
+        this.eventSelectedTwoCard.emit();
+    }
+  }
+
+
+
+
+
+  private toBlockCards(): void{
+    this.cards.forEach(c => {
+      if(c.getIndex() === this.card_A.getIndex() || c.getIndex() === this.card_B.getIndex()) {
+         c.setBlocked(true);
+      }
+    });
+  }
+
+
+
+
+
+  private toUnblockCards(): void{
+    this.updatingPlay = true;
+    let timer = setInterval(() => { 
+      this.cards.forEach(c => {
+        if(c.getIndex() === this.card_A.getIndex() || c.getIndex() === this.card_B.getIndex()) {
+          c.setBlocked(false);
+        }
+      }); 
+      this.clearCardsSelectds();    
+      clearInterval(timer);
+      this.updatingPlay = false;
+    }
+    , 500);    
+  }
+
+
+
+
+
+  private clearCardsSelectds(): void {
+    this.card_A = null;  
+    this.card_B = null;  
+  }
+
+
+
+
+
+  private selectedTwoCards(): boolean {
+    return this.card_A != null && this.card_B != null;
+  }
+
+
+
+
+
+  private validatePlay(): void {
+     let win = true;
+     this.cards.forEach(c=> {
+       if(c.isBlocked() == false){
+          win = false;
+          return;
+       }
+     })
+     if(win){
+       this.win = win;
+     }
+  }
+
+
+
+
+
+  private init(): void {
+    this.cards = new Array<Card>();
+    this.cards.push(new Card(1, false));
+    this.cards.push(new Card(0, false));
+    this.cards.push(new Card(1, false));
+    this.cards.push(new Card(0, false));
+    this.win = false;
+  }
 
 }

@@ -1,6 +1,12 @@
+<div *ngIf="win" class="alert alert-success" role="alert">
+   <h2>Congratulations!!!</h2> 
+   <button type="button" class="btn btn-info" (click)="init()">Try Again</button>
+</div>
+
 <div *ngIf="nivel === 4" class="panel"> 
-  <div class="col-5 float-left" *ngFor="let i of indices">
-    <img src="../../assets/img/small/{{i}}.png" class="imagem">
+  <div class="col-5 float-left" *ngFor="let c of cards">
+    <img *ngIf="c.blocked == true"  src="../../assets/img/small/{{c.index}}.png" class="imagem">
+    <img *ngIf="c.blocked == false" src="../../assets/img/small/interrogation.png" class="imagem" (click)="selectCard(c)">
   </div>
 </div>
 
