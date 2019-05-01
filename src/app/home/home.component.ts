@@ -16,15 +16,9 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) {}
 
   public chooseTheme(theme: string): void {
-    if (HomeComponent.PAGE_ANIMAL === theme) {
-      this.router.navigate(['play-animal']);
-    }else if(HomeComponent.PAGE_FRUITS === theme){
-      this.router.navigate(['play-fruit']);
-    }else if(HomeComponent.PAGE_FOOTBALL === theme){
-      this.router.navigate(['play-football']);
-    }else if(HomeComponent.PAGE_COUNTRY === theme){
-      this.router.navigate(['play-country']);
-    }
+    
+      this.router.navigate(['play']);
+    
   }
 
   ngOnInit() {}

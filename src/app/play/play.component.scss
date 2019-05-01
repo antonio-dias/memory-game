@@ -1,0 +1,18 @@
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+
+.panel {margin-top: 20%;}
+.imagem {cursor: pointer;}
+
+@include media-breakpoint-down(xs) {
+    .col-5 {
+        margin-left: 10%;
+        margin-right: -5%;
+        margin-bottom: 3%;
+    }
+}
+
+// sm: 576px
+@include media-breakpoint-up(sm) {}
+@include media-breakpoint-only(md) {}
+@include media-breakpoint-only(lg) {}
+@include media-breakpoint-up(xl) {}
