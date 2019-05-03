@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Card } from './card';
-import { debounceTime } from 'rxjs/operators'; 
-import { Observable, Subject } from 'rxjs';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-play',
@@ -22,7 +22,7 @@ export class PlayComponent implements OnInit {
 
 
 
-  constructor() { 
+  constructor(private router: Router) { 
     this.init();
   }
 
@@ -145,6 +145,15 @@ export class PlayComponent implements OnInit {
     this.cards.push(new Card(1, false));
     this.cards.push(new Card(0, false));
     this.win = false;
+  }
+
+
+
+
+  
+ 
+  public goToHome(): void {
+    this.router.navigate(['home']);    
   }
 
 }

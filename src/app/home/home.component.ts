@@ -8,17 +8,12 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  static PAGE_ANIMAL: string = "Animals";
-  static PAGE_FRUITS: string = "Fruits";
-  static PAGE_FOOTBALL: string = "Football";
-  static PAGE_COUNTRY: string = "Country";
-
+  nivel: string = '';
   constructor(private router: Router) {}
 
-  public chooseTheme(theme: string): void {
-    
+  public chooseNivel(nivel: string): void {
+      this.nivel = nivel;
       this.router.navigate(['play']);
-    
   }
 
   ngOnInit() {}

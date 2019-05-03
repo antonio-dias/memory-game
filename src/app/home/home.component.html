@@ -1,32 +1,5 @@
-<div class="container">  
-  <div class="row">
-    
-    <div class="card col-sm-12 col-md-5 col-lg-2">
-      <div class="card-body col-sm-12">
-        <h1 class="card-title col-sm-12 col-md-12">EASY</h1>
-          <div class="card-button col-sm-12 col-md-12">
-            <a (click)="chooseTheme('Animals')" class="btn btn-primary">GO</a>
-          </div>
-      </div>
-    </div>
-
-    <div class="card col-sm-12 col-md-5 col-lg-2">
-      <div class="card-body col-sm-12">
-        <h1 class="card-title col-sm-12 col-md-12">MEDIUM</h1>
-        <div class="card-button col-sm-12 col-md-12">
-          <a (click)="chooseTheme('Fruits')" class="btn btn-primary">GO</a>
-          </div>
-      </div>
-    </div>
-
-    <div class="card col-sm-12 col-md-5 col-lg-2">
-        <div class="card-body col-sm-12">
-          <h1 class="card-title col-sm-12 col-md-12">HARD</h1>
-          <div class="card-button col-sm-12 col-md-12">
-            <a (click)="chooseTheme('Football')" class="btn btn-primary">GO</a>
-            </div>
-        </div>
-      </div>
-
+  <div class="row justify-content-center">
+    <a (click)="chooseNivel('EASY')"   class="col-10 col-sm-3 btn btn-success btn-nivel">EASY</a>
+    <a (click)="chooseNivel('MEDIUM')" class="col-10 col-sm-3 btn btn-warning btn-nivel">MEDIUM</a>
+    <a (click)="chooseNivel('HARD')"   class="col-10 col-sm-3 btn btn-danger btn-nivel">HARD</a>
   </div>
-</div>

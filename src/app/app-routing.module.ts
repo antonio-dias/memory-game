@@ -5,8 +5,8 @@ import { HomeComponent } from './home/home.component';
 import {PlayComponent} from './play/play.component';
 
 const routes: Routes = [  
-  { path: 'memory-game', component: HomeComponent },  
-  { path: '', redirectTo: '/memory-game', pathMatch: 'full' },  
+  { path: 'home', component: HomeComponent },  
+  { path: '', redirectTo: '/home', pathMatch: 'full' },  
   { path: 'play', component: PlayComponent },  
 ];
 
