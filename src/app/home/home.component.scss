@@ -5,6 +5,9 @@
 @include media-breakpoint-up(xs) {
     .btn-nivel{
         margin-bottom: 3%;
+    }
+    .btn-nivel-selected{
+        margin-left: 1%;
     }        
 }
 //sm: 576px,

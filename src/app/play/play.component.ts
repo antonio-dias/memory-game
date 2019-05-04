@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Card } from './card';
 import { Router } from '@angular/router';
 
@@ -15,11 +15,9 @@ export class PlayComponent implements OnInit {
   private updatingPlay = false;
   private eventSelectedTwoCard = new EventEmitter();
   private cards: Array<Card> = [];
-  private nivel: number = 4;
+  private nivel: number = 0;
   private win: boolean = false;
-  
-
-
+  @Output() eventChooseNivelEasy = new EventEmitter();
 
 
   constructor(private router: Router) { 
@@ -40,6 +38,10 @@ export class PlayComponent implements OnInit {
       }
       this.validatePlay();
     })
+
+    this.eventChooseNivelEasy.subscribe(event =>{
+      console.log('eventChooseNivelEasy.subscribe() ', event);  
+    });
   }
 
 
@@ -154,6 +156,13 @@ export class PlayComponent implements OnInit {
  
   public goToHome(): void {
     this.router.navigate(['home']);    
+  }
+
+
+
+
+  chooseNivelEasy(): void {
+    console.log('PlayComponent.chooseNivelEasy()');
   }
 
 }

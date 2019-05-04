@@ -8,12 +8,28 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  nivel: string = '';
-  constructor(private router: Router) {}
+  static EASY: string = 'EASY';
+  static MEDIUM: string = 'MEDIUM';
+  static HARD: string = 'HARD';
+
+  nivel: string = null;
+  quantityCards: number = null;
+
+  constructor() {}
 
   public chooseNivel(nivel: string): void {
-      this.nivel = nivel;
-      this.router.navigate(['play']);
+    this.nivel = nivel;
+    if (HomeComponent.EASY === this.nivel) {
+      this.quantityCards = 4;
+    } else if(HomeComponent.MEDIUM === this.nivel) {
+      this.quantityCards = 8;
+    } else if(HomeComponent.MEDIUM === this.nivel) {
+      this.quantityCards = 12;
+    }
+  }
+
+  chooseNivelEasy(): void{
+
   }
 
   ngOnInit() {}
