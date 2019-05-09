@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +7,9 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  static EASY: string = 'EASY';
-  static MEDIUM: string = 'MEDIUM';
-  static HARD: string = 'HARD';
+  static EASY = 'EASY';
+  static HARD = 'HARD';
+  static MEDIUM = 'MEDIUM';
 
   nivel: string = null;
   quantityCards: number = null;
@@ -21,15 +20,11 @@ export class HomeComponent implements OnInit {
     this.nivel = nivel;
     if (HomeComponent.EASY === this.nivel) {
       this.quantityCards = 4;
-    } else if(HomeComponent.MEDIUM === this.nivel) {
+    } else if (HomeComponent.MEDIUM === this.nivel) {
       this.quantityCards = 8;
-    } else if(HomeComponent.MEDIUM === this.nivel) {
+    } else if (HomeComponent.HARD === this.nivel) {
       this.quantityCards = 12;
     }
-  }
-
-  chooseNivelEasy(): void{
-
   }
 
   ngOnInit() {}

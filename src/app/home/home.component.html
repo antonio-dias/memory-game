@@ -1,15 +1,13 @@
 <div *ngIf="nivel == null" class="row justify-content-center">
-  <a (click)="chooseNivelEasy()"   class="col-10 col-sm-3 btn btn-success btn-nivel">EASY</a>
+  <a (click)="chooseNivel('EASY')"   class="col-10 col-sm-3 btn btn-success btn-nivel">EASY</a>
   <a (click)="chooseNivel('MEDIUM')" class="col-10 col-sm-3 btn btn-warning btn-nivel">MEDIUM</a>
   <a (click)="chooseNivel('HARD')"   class="col-10 col-sm-3 btn btn-danger btn-nivel">HARD</a>
 </div>
 
 <div *ngIf="nivel != null" class="row justify-content-center">
-  <a (click)="chooseNivelEasy()"   class="col-3 col-sm-3 btn btn-success btn-nivel-selected">EASY</a>
+  <a (click)="chooseNivel('EASY')"   class="col-3 col-sm-3 btn btn-success btn-nivel-selected">EASY</a>
   <a (click)="chooseNivel('MEDIUM')" class="col-3 col-sm-3 btn btn-warning btn-nivel-selected">MEDIUM</a>
   <a (click)="chooseNivel('HARD')"   class="col-3 col-sm-3 btn btn-danger btn-nivel-selected">HARD</a>
 </div>
 
-<!--
-<app-play (eventChooseNivelEasy)="chooseNivelEasy()"></app-play>
--->
+<app-play [nivelSelected]="nivel" [quantityCardsSelected]="quantityCards"></app-play>

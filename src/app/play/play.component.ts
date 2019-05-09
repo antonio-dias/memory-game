@@ -1,7 +1,5 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { Card } from './card';
-import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-play',
@@ -10,18 +8,20 @@ import { Router } from '@angular/router';
 })
 export class PlayComponent implements OnInit {
 
-  private card_A: Card;
-  private card_B: Card;
-  private updatingPlay = false;
-  private eventSelectedTwoCard = new EventEmitter();
+  private cardA: Card;
+  private cardB: Card;
+  private win: boolean;
+  private updatingPlay: boolean;
   private cards: Array<Card> = [];
-  private nivel: number = 0;
-  private win: boolean = false;
-  @Output() eventChooseNivelEasy = new EventEmitter();
+  private eventSelectedTwoCard = new EventEmitter();
+  @Input() nivelSelected: string;
 
 
-  constructor(private router: Router) { 
-    this.init();
+
+
+
+  constructor() {
+    this.cards = new Array<Card>();
   }
 
 
@@ -30,17 +30,13 @@ export class PlayComponent implements OnInit {
 
   ngOnInit() {
     this.eventSelectedTwoCard.subscribe(response => {
-      if (this.card_A.getIndex() === this.card_B.getIndex()) {
+      if (this.cardA.getIndex() === this.cardB.getIndex()) {
         this.toBlockCards();
         this.clearCardsSelectds();
       } else {
         this.toUnblockCards();
       }
       this.validatePlay();
-    })
-
-    this.eventChooseNivelEasy.subscribe(event =>{
-      console.log('eventChooseNivelEasy.subscribe() ', event);  
     });
   }
 
@@ -49,13 +45,13 @@ export class PlayComponent implements OnInit {
 
 
   public selectCard(c: Card): void {
-    if(this.updatingPlay == false){
-      if (this.card_A == null) {
-          this.card_A = c;
-          this.card_A.setBlocked(true);
-      } else if (this.card_B == null) {
-          this.card_B = c;
-          this.card_B.setBlocked(true);
+    if (this.updatingPlay === undefined || this.updatingPlay === false) {
+      if (this.cardA == null) {
+          this.cardA = c;
+          this.cardA.setBlocked(true);
+      } else if (this.cardB == null) {
+          this.cardB = c;
+          this.cardB.setBlocked(true);
       }
       this.validateCard();
     }
@@ -65,7 +61,7 @@ export class PlayComponent implements OnInit {
 
 
 
-  private validateCard(): void{
+  private validateCard(): void {
     if (this.selectedTwoCards()) {
         this.eventSelectedTwoCard.emit();
     }
@@ -75,9 +71,9 @@ export class PlayComponent implements OnInit {
 
 
 
-  private toBlockCards(): void{
+  private toBlockCards(): void {
     this.cards.forEach(c => {
-      if(c.getIndex() === this.card_A.getIndex() || c.getIndex() === this.card_B.getIndex()) {
+      if (c.getIndex() === this.cardA.getIndex() || c.getIndex() === this.cardB.getIndex()) {
          c.setBlocked(true);
       }
     });
@@ -87,19 +83,19 @@ export class PlayComponent implements OnInit {
 
 
 
-  private toUnblockCards(): void{
+  private toUnblockCards(): void {
     this.updatingPlay = true;
-    let timer = setInterval(() => { 
+    const timer = setInterval(() => {
       this.cards.forEach(c => {
-        if(c.getIndex() === this.card_A.getIndex() || c.getIndex() === this.card_B.getIndex()) {
+        if (c.getIndex() === this.cardA.getIndex() || c.getIndex() === this.cardB.getIndex()) {
           c.setBlocked(false);
         }
-      }); 
-      this.clearCardsSelectds();    
+      });
+      this.clearCardsSelectds();
       clearInterval(timer);
       this.updatingPlay = false;
     }
-    , 500);    
+    , 500);
   }
 
 
@@ -107,8 +103,8 @@ export class PlayComponent implements OnInit {
 
 
   private clearCardsSelectds(): void {
-    this.card_A = null;  
-    this.card_B = null;  
+    this.cardA = null;
+    this.cardB = null;
   }
 
 
@@ -116,7 +112,7 @@ export class PlayComponent implements OnInit {
 
 
   private selectedTwoCards(): boolean {
-    return this.card_A != null && this.card_B != null;
+    return this.cardA != null && this.cardB != null;
   }
 
 
@@ -125,13 +121,13 @@ export class PlayComponent implements OnInit {
 
   private validatePlay(): void {
      let win = true;
-     this.cards.forEach(c=> {
-       if(c.isBlocked() == false){
+     this.cards.forEach(card => {
+       if (card.isBlocked() === false) {
           win = false;
           return;
        }
-     })
-     if(win){
+     });
+     if (win) {
        this.win = win;
      }
   }
@@ -140,29 +136,53 @@ export class PlayComponent implements OnInit {
 
 
 
-  private init(): void {
+  public createCards(quantity: number): void {
     this.cards = new Array<Card>();
-    this.cards.push(new Card(1, false));
-    this.cards.push(new Card(0, false));
-    this.cards.push(new Card(1, false));
-    this.cards.push(new Card(0, false));
     this.win = false;
+
+    if (quantity === 4) {
+        this.cards.push(new Card(1, false));
+        this.cards.push(new Card(0, false));
+        this.cards.push(new Card(1, false));
+        this.cards.push(new Card(0, false));
+    } else if (quantity === 8) {
+        this.cards.push(new Card(1, false));
+        this.cards.push(new Card(0, false));
+        this.cards.push(new Card(1, false));
+        this.cards.push(new Card(0, false));
+        this.cards.push(new Card(1, false));
+        this.cards.push(new Card(0, false));
+        this.cards.push(new Card(1, false));
+        this.cards.push(new Card(0, false));
+    } else {
+        this.cards.push(new Card(1, false));
+        this.cards.push(new Card(0, false));
+        this.cards.push(new Card(1, false));
+        this.cards.push(new Card(0, false));
+        this.cards.push(new Card(1, false));
+        this.cards.push(new Card(0, false));
+        this.cards.push(new Card(1, false));
+        this.cards.push(new Card(0, false));
+        this.cards.push(new Card(1, false));
+        this.cards.push(new Card(0, false));
+        this.cards.push(new Card(1, false));
+        this.cards.push(new Card(0, false));
+    }
+  }
+
+
+
+  @Input()
+  set quantityCardsSelected(quantity: number) {
+    this.createCards(quantity);
   }
 
 
 
 
-  
- 
+
   public goToHome(): void {
-    this.router.navigate(['home']);    
-  }
-
-
-
-
-  chooseNivelEasy(): void {
-    console.log('PlayComponent.chooseNivelEasy()');
+    //this.router.navigate(['home']);
   }
 
 }

@@ -1,4 +1,5 @@
-<div *ngIf="win" class="alert alert-success" role="alert">
+<!--
+<div *ngIf="win != null && win === true" class="alert alert-success" role="alert">
    <h2>Congratulations!!!</h2> 
    <div class="row">
      <div class="col-6">
@@ -9,12 +10,11 @@
      </div>
   </div>
 </div>
+-->
 
-<div *ngIf="nivel === 4" class="row justify-content-center"> 
+<div [hidden]="nivelSelected == null" class="row justify-content-center"> 
   <div class="col-5 offset-2" *ngFor="let c of cards">
     <img *ngIf="c.blocked == true"  src="../../assets/img/small/{{c.index}}.png" class="imagem">
     <img *ngIf="c.blocked == false" src="../../assets/img/small/interrogation.png" class="imagem" (click)="selectCard(c)">
   </div>
 </div>
-
-
