@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { Card } from './card';
 import { Router } from '@angular/router';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-play',
@@ -16,6 +17,7 @@ export class PlayComponent implements OnInit {
   private cards: Array<Card> = [];
   private flagsPossible: Array<number> = [];
   private eventSelectedTwoCard = new EventEmitter();
+  private eventWinnable = new EventEmitter<boolean>();
   @Input() nivelSelected: string;
   @Input() isMobile: boolean;
   @Input() isTablet: boolean;
@@ -43,6 +45,14 @@ export class PlayComponent implements OnInit {
       }
       this.validatePlay();
     });
+
+    this.eventWinnable.pipe(debounceTime(500)).subscribe(response => {
+      const win: boolean = response;
+      if (win) {
+        alert('WIN!');
+      }
+    });
+
   }
 
 
@@ -134,6 +144,7 @@ export class PlayComponent implements OnInit {
      });
      if (win) {
        this.win = win;
+       this.eventWinnable.emit(true);
      }
   }
 
@@ -162,6 +173,8 @@ export class PlayComponent implements OnInit {
       });
       cont ++;
     }
+
+    this.cards.sort(() => Math.random() - 0.5);
 
   }
 

@@ -2,6 +2,7 @@
 
 //.panel {margin-top: 20%;}
 .imagem {cursor: pointer;}
+.imagem-ok{cursor: pointer;box-shadow: 1px 1px 14px grey;}
 .btn-to-tryAgain{float: left;}
 .btn-to-change{float: right;}
 .panel-play{margin-top: 5%;}
@@ -16,6 +17,27 @@
 
 // sm: 576px
 @include media-breakpoint-up(sm) {}
-@include media-breakpoint-only(md) {}
-@include media-breakpoint-only(lg) {}
-@include media-breakpoint-up(xl) {}
+
+@include media-breakpoint-only(md) {
+    .col-3{
+        margin-left: 10%;
+        margin-right: -5%;
+        margin-bottom: 3%;
+    }
+}
+
+@include media-breakpoint-only(lg) {
+    .col-3{
+        margin-left: 10%;
+        margin-right: -5%;
+        margin-bottom: 3%;
+    }
+}
+
+@include media-breakpoint-up(xl) {
+    .col-3{
+        margin-left: 10%;
+        margin-right: -5%;
+        margin-bottom: 3%;
+    }
+}
