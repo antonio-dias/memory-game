@@ -10,4 +10,9 @@
   <a (click)="chooseNivel('HARD')"   class="col-3 col-sm-3 btn btn-danger btn-nivel-selected">HARD</a>
 </div>
 
-<app-play [nivelSelected]="nivel" [quantityCardsSelected]="quantityCards"></app-play>
+<app-play [nivelSelected]="nivel" 
+          [quantityCardsSelected]="quantityCards"
+          [isMobile]="isMobile"
+          [isTablet]="isTablet"
+          [isDesktop]="isDesktop">
+</app-play>

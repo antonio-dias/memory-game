@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { Card } from './card';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-play',
@@ -13,14 +14,18 @@ export class PlayComponent implements OnInit {
   private win: boolean;
   private updatingPlay: boolean;
   private cards: Array<Card> = [];
+  private flagsPossible: Array<number> = [];
   private eventSelectedTwoCard = new EventEmitter();
   @Input() nivelSelected: string;
+  @Input() isMobile: boolean;
+  @Input() isTablet: boolean;
+  @Input() isDesktop: boolean;
 
 
 
 
 
-  constructor() {
+  constructor(private router: Router) {
     this.cards = new Array<Card>();
   }
 
@@ -137,43 +142,38 @@ export class PlayComponent implements OnInit {
 
 
   public createCards(quantity: number): void {
-    this.cards = new Array<Card>();
     this.win = false;
+    this.cards = new Array<Card>();
+    this.flagsPossible = new Array<number>();
 
-    if (quantity === 4) {
-        this.cards.push(new Card(1, false));
-        this.cards.push(new Card(0, false));
-        this.cards.push(new Card(1, false));
-        this.cards.push(new Card(0, false));
-    } else if (quantity === 8) {
-        this.cards.push(new Card(1, false));
-        this.cards.push(new Card(0, false));
-        this.cards.push(new Card(1, false));
-        this.cards.push(new Card(0, false));
-        this.cards.push(new Card(1, false));
-        this.cards.push(new Card(0, false));
-        this.cards.push(new Card(1, false));
-        this.cards.push(new Card(0, false));
-    } else {
-        this.cards.push(new Card(1, false));
-        this.cards.push(new Card(0, false));
-        this.cards.push(new Card(1, false));
-        this.cards.push(new Card(0, false));
-        this.cards.push(new Card(1, false));
-        this.cards.push(new Card(0, false));
-        this.cards.push(new Card(1, false));
-        this.cards.push(new Card(0, false));
-        this.cards.push(new Card(1, false));
-        this.cards.push(new Card(0, false));
-        this.cards.push(new Card(1, false));
-        this.cards.push(new Card(0, false));
+    do {
+      const numberSorted = Math.floor(Math.random() * 10);
+      const exist = this.flagsPossible.includes(numberSorted); //TODO:REVIEW
+      if (numberSorted > 0 && exist === false) {
+        this.flagsPossible.push(numberSorted);
+      }
+    } while (this.flagsPossible.length < (quantity / 2));
+
+    let cont = 1;
+
+    while (cont < 3) {
+      this.flagsPossible.forEach(numberSorted => {
+        this.cards.push(new Card(numberSorted, false));
+      });
+      cont ++;
     }
+
   }
+
+
 
 
 
   @Input()
   set quantityCardsSelected(quantity: number) {
+    this.win = undefined;
+    this.cards = undefined;
+    this.flagsPossible = undefined;
     this.createCards(quantity);
   }
 

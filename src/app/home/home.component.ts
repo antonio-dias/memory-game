@@ -1,4 +1,5 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,14 +8,28 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  static EASY = 'EASY';
-  static HARD = 'HARD';
-  static MEDIUM = 'MEDIUM';
-
+  private static EASY = 'EASY';
+  private static HARD = 'HARD';
+  private static MEDIUM = 'MEDIUM';
+  private mobileMaxSizeWidth = 425;
+  private tabletMaxSizeWidth = 768;
+  isMobile = false;
+  isTablet = false;
+  isDesktop = false;
   nivel: string = null;
   quantityCards: number = null;
 
-  constructor() {}
+
+
+
+
+  constructor(private router: Router) {
+    this.loadScreenSize();
+  }
+
+
+
+
 
   public chooseNivel(nivel: string): void {
     this.nivel = nivel;
@@ -26,6 +41,32 @@ export class HomeComponent implements OnInit {
       this.quantityCards = 12;
     }
   }
+
+
+
+
+
+  @HostListener('window:resize')
+  loadScreenSize() {
+    const scrWidth = window.innerWidth;
+    if (scrWidth <= this.mobileMaxSizeWidth) {
+        this.isMobile = true;
+        this.isTablet = false;
+        this.isDesktop = false;
+    } else if (scrWidth <= this.tabletMaxSizeWidth) {
+        this.isMobile = false;
+        this.isTablet = true;
+        this.isDesktop = false;
+    } else {
+        this.isMobile = false;
+        this.isTablet = false;
+        this.isDesktop = true;
+    }
+  }
+
+
+
+
 
   ngOnInit() {}
 

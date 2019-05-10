@@ -4,8 +4,8 @@ import {RouterModule, Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: 'memory-game', component: HomeComponent },  
-  { path: '', redirectTo: '/memory-game', pathMatch: 'full' },  
+  { path: 'memory-game', component: HomeComponent },
+  { path: '', redirectTo: '/memory-game', pathMatch: 'full' },
 ];
 
 @NgModule({

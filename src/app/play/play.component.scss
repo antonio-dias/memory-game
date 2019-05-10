@@ -4,6 +4,7 @@
 .imagem {cursor: pointer;}
 .btn-to-tryAgain{float: left;}
 .btn-to-change{float: right;}
+.panel-play{margin-top: 5%;}
 
 @include media-breakpoint-down(xs) {
     .col-5 {
