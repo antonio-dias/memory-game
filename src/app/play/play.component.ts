@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { Card } from './card';
 import { Router } from '@angular/router';
 import { debounceTime } from 'rxjs/operators';
+import { PlayService } from '../play.service';
 
 @Component({
   selector: 'app-play',
@@ -27,7 +28,7 @@ export class PlayComponent implements OnInit {
 
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private playService: PlayService) {
     this.cards = new Array<Card>();
   }
 
@@ -52,6 +53,8 @@ export class PlayComponent implements OnInit {
         alert('WIN!');
       }
     });
+
+    this.playService.currentQuantity.subscribe(q => this.quantityCardsSelected(q));
 
   }
 
@@ -182,20 +185,13 @@ export class PlayComponent implements OnInit {
 
 
 
-  @Input()
-  set quantityCardsSelected(quantity: number) {
+
+  private quantityCardsSelected(quantity: number) {
     this.win = undefined;
     this.cards = undefined;
     this.flagsPossible = undefined;
     this.createCards(quantity);
   }
 
-
-
-
-
-  public goToHome(): void {
-    //this.router.navigate(['home']);
-  }
 
 }

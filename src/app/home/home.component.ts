@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { PlayService } from '../play.service';
 
 @Component({
   selector: 'app-home',
@@ -23,8 +24,15 @@ export class HomeComponent implements OnInit {
 
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private playService: PlayService) {
     this.loadScreenSize();
+  }
+
+
+
+
+  ngOnInit() {
+    this.playService.currentQuantity.subscribe(q => this.quantityCards = q);
   }
 
 
@@ -40,6 +48,7 @@ export class HomeComponent implements OnInit {
     } else if (HomeComponent.HARD === this.nivel) {
       this.quantityCards = 12;
     }
+    this.playService.changeQuantityCards(this.quantityCards);
   }
 
 
@@ -64,10 +73,5 @@ export class HomeComponent implements OnInit {
     }
   }
 
-
-
-
-
-  ngOnInit() {}
 
 }
