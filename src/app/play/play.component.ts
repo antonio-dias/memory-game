@@ -162,7 +162,7 @@ export class PlayComponent implements OnInit {
 
     do {
       const numberSorted = Math.floor(Math.random() * 10);
-      const exist = this.flagsPossible.includes(numberSorted); //TODO:REVIEW
+      const exist = this.flagsPossible.includes(numberSorted);
       if (numberSorted > 0 && exist === false) {
         this.flagsPossible.push(numberSorted);
       }
