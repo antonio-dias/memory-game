@@ -1,8 +1,9 @@
-import { Component, OnInit, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Inject, Renderer2 } from '@angular/core';
 import { Card } from './card';
 import { Router } from '@angular/router';
 import { debounceTime } from 'rxjs/operators';
 import { PlayService } from '../play.service';
+import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-play',
@@ -27,10 +28,12 @@ export class PlayComponent implements OnInit {
 
 
 
-
-  constructor(private router: Router, private playService: PlayService) {
-    this.cards = new Array<Card>();
-  }
+constructor(private router: Router,
+            private playService: PlayService,
+            @Inject(DOCUMENT) private document: Document,
+            private rendered: Renderer2) {
+  this.cards = new Array<Card>();
+}
 
 
 
@@ -49,12 +52,16 @@ export class PlayComponent implements OnInit {
 
     this.eventWinnable.pipe(debounceTime(500)).subscribe(response => {
       const win: boolean = response;
-      if (win) {
-        alert('WIN!');
+      if (win && this.isDesktop) {
+        this.rendered.addClass(this.document.body, 'body-victory');
       }
     });
 
-    this.playService.currentQuantity.subscribe(q => this.quantityCardsSelected(q));
+    this.playService.currentQuantity.subscribe(q => {
+      this.rendered.removeClass(this.document.body, 'body-victory');
+      this.rendered.removeClass(this.document.body, 'body-new-game');
+      this.quantityCardsSelected(q);
+    });
 
   }
 
