@@ -1,7 +1,13 @@
 <div class="row justify-content-center">
-  <a (click)="chooseNivel('EASY')"   class="col-10 col-sm-3 btn btn-success btn-nivel btd-easy-selected">EASY</a>
-  <a (click)="chooseNivel('MEDIUM')" class="col-10 col-sm-3 btn btn-warning btn-nivel btd-medium-selected">MEDIUM</a>
-  <a (click)="chooseNivel('HARD')"   class="col-10 col-sm-3 btn btn-danger btn-nivel btd-hard-selected">HARD</a>
+  <a (click)="chooseNivel('EASY')"   class="col-10 col-sm-3 btn btn-success btn-nivel btd-easy-selected">
+      <i [hidden]="nivel != 'EASY'" class="fas fa-map-marker-alt"></i>  EASY
+  </a>
+  <a (click)="chooseNivel('MEDIUM')" class="col-10 col-sm-3 btn btn-warning btn-nivel btd-medium-selected">
+      <i [hidden]="nivel != 'MEDIUM'" class="fas fa-map-marker-alt"></i>  MEDIUM
+  </a>
+  <a (click)="chooseNivel('HARD')"   class="col-10 col-sm-3 btn btn-danger btn-nivel btd-hard-selected">
+      <i [hidden]="nivel != 'HARD'" class="fas fa-map-marker-alt"></i>  HARD
+  </a>
 </div>
 
 <app-play [nivelSelected]="nivel" 
@@ -9,3 +15,4 @@
           [isTablet]="isTablet"
           [isDesktop]="isDesktop">
 </app-play>
+
