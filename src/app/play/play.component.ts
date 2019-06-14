@@ -16,10 +16,10 @@ export class PlayComponent implements OnInit {
   private cardB: Card;
   private win: boolean;
   private updatingPlay: boolean;
-  private cards: Array<Card> = [];
   private flagsPossible: Array<number> = [];
   private eventSelectedTwoCard = new EventEmitter();
   private eventWinnable = new EventEmitter<boolean>();
+  cards: Array<Card> = [];
   @Input() nivelSelected: string;
   @Input() isMobile: boolean;
   @Input() isTablet: boolean;
