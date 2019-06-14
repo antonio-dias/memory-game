@@ -17,7 +17,9 @@ var server = http.createServer(function( request, response ){
 app.use(express.static(__dirname + '/dist'));
 // Start the app by listening on the default
 // Heroku port
-app.listen(process.env.PORT || 8080);
+app.listen(5000, function(){
+  console.log('listening on *:5000');
+});
 
 // If an incoming request uses
 // a protocol other than HTTPS,
