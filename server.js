@@ -1,14 +1,13 @@
 const express = require('express');
 const app = express();
 var http = require('http');
-var HttpCors = require('http-cors');
+
+// https://www.npmjs.com/package/http-cors
+const cors = require('http-cors');
 
 // configure (all allowed - see source for options) 
-var cors = new HttpCors();
- 
 var server = http.createServer(function( request, response ){
-    if (cors.apply(request, response))
-        return;	// this was an OPTIONS request - no further action needed  
+    if (cors(request, response))return;	// this was an OPTIONS request - no further action needed  
     // do your things 
 });
 
