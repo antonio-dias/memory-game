@@ -61,6 +61,7 @@ constructor(private router: Router,
       this.rendered.removeClass(this.document.body, 'body-victory');
       this.rendered.removeClass(this.document.body, 'body-new-game');
       this.quantityCardsSelected(q);
+      this.clearCardsSelectds();
     });
 
   }
