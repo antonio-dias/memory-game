@@ -1,16 +1,8 @@
-<div [hidden]="nivelSelected == null" class="row container panel-play">
+<div [hidden]="nivelSelected == null" class="row justify-content-center panel-play">
   
-  <!-- MOBILE -->
-  <div [hidden]="isMobile == false" class="row col-5 offset-2 justify-content-center" *ngFor="let c of cards">
+  <div class="col-lg-3 col-sm-4 col-5 card-margin text-center" *ngFor="let c of cards">
     <img *ngIf="c.blocked == true"  src="../../assets/img/cards/{{c.index}}.png" class="">
     <img *ngIf="c.blocked == false" src="../../assets/img/cards/interrogation.png" class="imagem" (click)="selectCard(c)">
   </div>
-  
-  <!-- DESKTOP + TABLET -->
-  <div [hidden]="isTablet == false && isDesktop == false" class="row col-3 justify-content-center" *ngFor="let c of cards">
-    <img *ngIf="c.blocked == true"  src="../../assets/img/cards/{{c.index}}.png" class="">
-    <img *ngIf="c.blocked == false" src="../../assets/img/cards/interrogation.png" class="imagem" (click)="selectCard(c)">
-  </div>
-
 
 </div>

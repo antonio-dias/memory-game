@@ -4,37 +4,17 @@
 .imagem-ok{cursor: pointer;box-shadow: 1px 1px 14px grey;}
 .panel-play{margin-top: 5%;}
 
-@include media-breakpoint-down(xs) {
-    .col-5 {
-        margin-left: 10%;
-        margin-right: -5%;
-        margin-bottom: 3%;
-    }
+.card-margin{
+    margin-bottom: 3%;
 }
+
+@include media-breakpoint-down(xs) {}
 
 // sm: 576px
 @include media-breakpoint-up(sm) {}
 
-@include media-breakpoint-only(md) {
-    .col-3{
-        margin-left: 10%;
-        margin-right: -5%;
-        margin-bottom: 3%;
-    }
-}
+@include media-breakpoint-only(md) {}
 
-@include media-breakpoint-only(lg) {
-    .col-3{
-        margin-left: 10%;
-        margin-right: -5%;
-        margin-bottom: 3%;
-    }
-}
+@include media-breakpoint-only(lg) {}
 
-@include media-breakpoint-up(xl) {
-    .col-3{
-        margin-left: 10%;
-        margin-right: -5%;
-        margin-bottom: 3%;
-    }
-}
+@include media-breakpoint-up(xl) {}

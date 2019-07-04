@@ -62,14 +62,17 @@ export class HomeComponent implements OnInit {
         this.isMobile = true;
         this.isTablet = false;
         this.isDesktop = false;
+        console.log('isMobile: ', this.isMobile);
     } else if (scrWidth <= this.tabletMaxSizeWidth) {
         this.isMobile = false;
         this.isTablet = true;
         this.isDesktop = false;
+        console.log('isTablet: ', this.isTablet);
     } else {
         this.isMobile = false;
         this.isTablet = false;
         this.isDesktop = true;
+        console.log('isDesktop: ', this.isDesktop);
     }
   }
 
