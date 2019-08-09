@@ -1,2 +1,5 @@
 # memory-game
-Angular client &amp; Node server
+
+Angular 7
+
+[clique aqui para jogar](https://ortiz-memorygame.herokuapp.com/memory-game)
